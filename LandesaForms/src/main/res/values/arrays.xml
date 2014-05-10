@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="sex_array">
+        <item>M</item>
+        <item>F</item>
+        <item>Unspecified</item>
+    </string-array>
+    <string-array name="caste_array">
+        <item>SC</item>
+        <item>ST</item>
+        <item>Other</item>
+    </string-array>
+
+</resources>
