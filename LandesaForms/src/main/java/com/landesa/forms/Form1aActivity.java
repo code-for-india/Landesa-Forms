@@ -1,5 +1,8 @@
 package com.landesa.forms;
 
+import android.app.DatePickerDialog;
+import android.app.DatePickerDialog.OnDateSetListener;
+import android.app.Dialog;
 import android.content.Intent;
 import android.graphics.Color;
 import android.support.v7.app.ActionBarActivity;
@@ -10,6 +13,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.TableLayout;
 import android.widget.TableRow;
@@ -25,19 +29,27 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.PrintStream;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Map;
 
 public class Form1aActivity extends ActionBarActivity {
     private static final String TAG = "Form1aActivity";
+    private static final int DATE_DIALOG_ID = 999;
+
     public static final int ADD_DETAIL_REQUEST = 0;
 
-    Map<View, Form1aDetails> mForm1aDetailsMap = new HashMap<View, Form1aDetails>();
+    private Map<View, Form1aDetails> mForm1aDetailsMap = new HashMap<View, Form1aDetails>();
+    private int mYear;
+    private int mMonth;
+    private int mDay;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.form1a_layout);
+
+        setCurrentDateOnView();
     }
 
 
@@ -82,6 +94,21 @@ public class Form1aActivity extends ActionBarActivity {
         statusMsg.setText(R.string.status_success_form1a);
         statusMsg.setTextColor(Color.RED);
         clearData();
+    }
+
+    @Override
+    protected Dialog onCreateDialog(int id) {
+        switch (id) {
+            case DATE_DIALOG_ID:
+                // set date picker as current date
+                return new DatePickerDialog(this, new OnDateSetListener() {
+                    @Override
+                    public void onDateSet(DatePicker datePicker, int y, int m, int d) {
+                        setDate(y, m, d);
+                    }
+                }, mYear, mMonth, mDay);
+        }
+        return null;
     }
 
     protected void onActivityResult(int requestCode, int resultCode,
@@ -136,5 +163,33 @@ public class Form1aActivity extends ActionBarActivity {
         ((EditText) findViewById(R.id.onea_revenue_circle)).setText("");
         ((EditText) findViewById(R.id.onea_tahasil)).setText("");
         ((EditText) findViewById(R.id.onea_source_of_data)).setText("");
+    }
+
+    private void setDate(int y, int m, int d) {
+        mYear = y;
+        mMonth = m;
+        mDay = d;
+        TextView datePickerView = (TextView) findViewById(R.id.onea_date_data_collection_display);
+
+        // set current date into textview
+        datePickerView.setText(new StringBuilder()
+                // Month is 0 based, just add 1
+                .append(mDay).append("/").append(mMonth + 1).append("/")
+                .append(mYear).append(" "));
+    }
+
+    // display current date
+    private void setCurrentDateOnView() {
+        TextView datePickerView = (TextView) findViewById(R.id.onea_date_data_collection_display);
+
+        final Calendar c = Calendar.getInstance();
+        setDate(c.get(Calendar.YEAR), c.get(Calendar.MONTH), c.get(Calendar.DAY_OF_MONTH));
+
+        datePickerView.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                showDialog(DATE_DIALOG_ID);
+            }
+        });
     }
 }

@@ -16,8 +16,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Village"
-                android:layout_column="1"/>
+                android:text="Village"/>
 
             <EditText
                 android:layout_width="match_parent"
@@ -27,11 +26,12 @@
                 android:ems="10"
                 android:editable="true"/>
 
+        </TableRow>
+        <TableRow>
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Revenue Circle"
-                android:layout_column="1"/>
+                android:text="Revenue Circle"/>
 
             <EditText
                 android:layout_width="match_parent"
@@ -39,8 +39,7 @@
                 android:id="@+id/onea_revenue_circle"
                 android:layout_gravity="right"
                 android:editable="true"
-                android:ems="10"
-                android:layout_column="5"/>
+                android:ems="10"/>
         </TableRow>
         <TableRow
             android:layout_width="match_parent"
@@ -49,8 +48,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Tahasil"
-                android:layout_column="1"/>
+                android:text="Tahasil"/>
 
             <EditText
                 android:layout_width="match_parent"
@@ -68,8 +66,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Source of data"
-                android:layout_column="1"/>
+                android:text="Source of data"/>
 
             <EditText
                 android:layout_width="match_parent"
@@ -79,19 +76,21 @@
                 android:layout_gravity="right"
                 android:editable="true"/>
 
+        </TableRow>
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Date of Data collection"
-                android:layout_column="1"/>
-
+                android:text="Date of Data collection"/>
+            <EditText
+                android:id="@+id/onea_date_data_collection_display"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:editable="false"/>
         </TableRow>
 
-        <TableRow
-            android:layout_width="fill_parent"
-            android:layout_height="fill_parent">
-
-        </TableRow>
     </TableLayout>
 
     <ScrollView
@@ -125,6 +124,4 @@
         android:layout_height="wrap_content"
         android:id="@+id/onea_status_message"
         android:layout_gravity="center_horizontal"/>
-
-
 </LinearLayout>
